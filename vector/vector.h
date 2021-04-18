@@ -60,7 +60,7 @@ namespace se_detail {
             rhs.buf_ = nullptr;
         }
         // Clears all elemets from the vector, size will equal zero, capacity doesn't change
-        void clear() {
+        void clear() noexcept {
             size_ = 0;
         }
         // Erases the element from the vector buffer
@@ -117,11 +117,11 @@ namespace se_detail {
             }
         }
         // Return current capacity of this vector buffer
-        std::size_t capacity() {
+        std::size_t capacity() const {
             return capacity_;
         }
         // Return current size of this vector buffer
-        std::size_t size() {
+        std::size_t size() const {
             return size_;
         }
         virtual ~vector_buf() {
@@ -165,7 +165,7 @@ namespace se {
                 return *this;
             }
             // Access the element with the given index 
-            T& operator[](std::size_t index) {
+            T& operator[](std::size_t index) const {
                 if (index >= size_)
                     throw std::runtime_error("Index is out of range.");
 
@@ -187,7 +187,7 @@ namespace se {
                 buf_[size_++] = element;
             }
             // Check whether the vector is empty
-            bool empty() {
+            bool empty() const {
                 return (size_ == 0);
             }
     };
