@@ -186,9 +186,30 @@ namespace se {
 
                 buf_[size_++] = element;
             }
+            // Reserve space for elements
+            void reserve(std::size_t new_capacity) {
+                se_detail::vector_buf<T>::reserve(new_capacity);
+            }
+            // Erases the element from the vector buffer
+            // If there is no such element, does nothing
+            void erase(const T& element) {
+                se_detail::vector_buf<T>::erase(element);
+            }
             // Check whether the vector is empty
             bool empty() const {
-                return (size_ == 0);
+                return se_detail::vector_buf<T>::empty();
+            }
+            // Return current capacity of this vector buffer
+            std::size_t capacity() const {
+                return se_detail::vector_buf<T>::capacity_;
+            }
+            // Return current size of this vector buffer
+            std::size_t size() const {
+                return se_detail::vector_buf<T>::size();
+            }
+            // Clears all elemets from the vector, size will equal zero, capacity doesn't change
+            void clear() noexcept {
+                se_detail::vector_buf<T>::clear();
             }
     };
 };
